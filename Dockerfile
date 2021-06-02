@@ -150,7 +150,8 @@ RUN mkdir -p "${AGENT_WORKDIR}"; \
     sudo chmod +x /usr/local/bin/dind; \
     # install jenkins-agent \
     base_url="https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting"; \
-    version=$(curl -fsS ${base_url}/maven-metadata.xml | grep "<latest>.*</latest>" | sed -e "s#\(.*\)\(<latest>\)\(.*\)\(</latest>\)\(.*\)#\3#g"); \
+    # to get the latest: version=$(curl -fsS ${base_url}/maven-metadata.xml | grep "<latest>.*</latest>" | sed -e "s#\(.*\)\(<latest>\)\(.*\)\(</latest>\)\(.*\)#\3#g"); \
+    version="4.7"; \
     sudo curl --create-dirs -fsSLo /usr/share/jenkins/agent.jar "${base_url}/${version}/remoting-${version}.jar"; \
     sudo chmod 755 /usr/share/jenkins; \
     sudo chmod +x /usr/share/jenkins/agent.jar; \
