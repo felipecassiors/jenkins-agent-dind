@@ -23,7 +23,7 @@ ARG NPM_GLOBAL_PATH="${HOME}/.npm-global"
 ENV AGENT_WORKDIR="${HOME}/agent" \
     CI=true \
     PATH="${NPM_GLOBAL_PATH}/bin:${HOME}/.local/bin:${PATH}" \
-    JAVA_HOME="/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64" \
+    JAVA_HOME="/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64" \
     # locale and encoding
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
@@ -100,7 +100,7 @@ RUN mkdir -p "${AGENT_WORKDIR}"; \
         rsync \
         sshpass \
         python3-pip \
-        adoptopenjdk-8-hotspot \
+        adoptopenjdk-11-hotspot \
         nodejs \
         yarn \
         kubectl \
@@ -150,7 +150,8 @@ RUN mkdir -p "${AGENT_WORKDIR}"; \
     sudo chmod +x /usr/local/bin/dind; \
     # install jenkins-agent \
     base_url="https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting"; \
-    version=$(curl -fsS ${base_url}/maven-metadata.xml | grep "<latest>.*</latest>" | sed -e "s#\(.*\)\(<latest>\)\(.*\)\(</latest>\)\(.*\)#\3#g"); \
+    # to get the latest: version=$(curl -fsS ${base_url}/maven-metadata.xml | grep "<latest>.*</latest>" | sed -e "s#\(.*\)\(<latest>\)\(.*\)\(</latest>\)\(.*\)#\3#g"); \
+    version="4.7"; \
     sudo curl --create-dirs -fsSLo /usr/share/jenkins/agent.jar "${base_url}/${version}/remoting-${version}.jar"; \
     sudo chmod 755 /usr/share/jenkins; \
     sudo chmod +x /usr/share/jenkins/agent.jar; \
