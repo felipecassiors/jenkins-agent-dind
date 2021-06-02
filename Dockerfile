@@ -100,7 +100,7 @@ RUN mkdir -p "${AGENT_WORKDIR}"; \
         rsync \
         sshpass \
         python3-pip \
-        adoptopenjdk-8-hotspot \
+        adoptopenjdk-11-hotspot \
         nodejs \
         yarn \
         kubectl \
